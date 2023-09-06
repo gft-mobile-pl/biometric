@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <application>
+        <activity
+            android:name="com.gft.biometrics.framework.services.AndroidXBiometricAuthenticator$BiometricAuthenticationActivity"
+            android:theme="@style/Theme.BiometricAuthenticator.Transparent" />
+    </application>
 
 
 </manifest>

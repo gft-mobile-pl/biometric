@@ -5,7 +5,7 @@ import javax.crypto.Cipher
 
 interface BiometricAuthenticator {
 
-    suspend fun authenticate(authenticationStrength: AuthenticationStrength, promptParams: AuthenticationPromptParams? = null)
+    suspend fun authenticate(authenticationStrength: AuthenticationStrength, promptParams: AuthenticationPromptParams)
 
     suspend fun authenticate(cipher: Cipher, promptParams: AuthenticationPromptParams)
 
