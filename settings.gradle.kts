@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "biometrics"
 include(":app")
+include(":domain")
+include(":framework")
