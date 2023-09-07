@@ -1,20 +1,17 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "com.gft.framework"
+    namespace = "com.gft.biometrics.framework"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.gft.framework"
         minSdk = 28
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -49,7 +46,7 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":biometrics-domain")))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
