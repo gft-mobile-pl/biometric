@@ -54,15 +54,21 @@ class AndroidXBiometricAuthenticator(
     private fun createPromptInfo(
         authenticationStrength: AuthenticationStrength,
         promptParams: BiometricAuthenticator.AuthenticationPromptParams
-    ) = PromptInfo.Builder()
-        .setAllowedAuthenticators(authenticationStrength.toAuthenticator())
-        .setTitle(promptParams.title)
-        .apply {
-            promptParams.negativeButtonLabel?.let { negativeButtonLabel -> setNegativeButtonText(negativeButtonLabel) }
-            promptParams.subtitle?.let { subtitle -> setSubtitle(subtitle) }
-            promptParams.description?.let { description -> setDescription(description) }
+    ): PromptInfo {
+        if (authenticationStrength != AuthenticationStrength.DEVICE_CREDENTIAL && promptParams.negativeButtonLabel == null) {
+            throw IllegalArgumentException("Negative button label for authentication strength $authenticationStrength is required.")
         }
-        .build()
+
+        return PromptInfo.Builder()
+            .setAllowedAuthenticators(authenticationStrength.toAuthenticator())
+            .setTitle(promptParams.title)
+            .apply {
+                promptParams.negativeButtonLabel?.let { negativeButtonLabel -> setNegativeButtonText(negativeButtonLabel) }
+                promptParams.subtitle?.let { subtitle -> setSubtitle(subtitle) }
+                promptParams.description?.let { description -> setDescription(description) }
+            }
+            .build()
+    }
 
     private suspend fun authenticate(
         promptInfo: PromptInfo,
