@@ -57,8 +57,8 @@ class AndroidXBiometricAuthenticator(
     ) = PromptInfo.Builder()
         .setAllowedAuthenticators(authenticationStrength.toAuthenticator())
         .setTitle(promptParams.title)
-        .setNegativeButtonText(promptParams.negativeButtonLabel)
         .apply {
+            promptParams.negativeButtonLabel?.let { negativeButtonLabel -> setNegativeButtonText(negativeButtonLabel) }
             promptParams.subtitle?.let { subtitle -> setSubtitle(subtitle) }
             promptParams.description?.let { description -> setDescription(description) }
         }

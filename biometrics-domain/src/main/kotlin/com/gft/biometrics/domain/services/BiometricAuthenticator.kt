@@ -11,7 +11,7 @@ interface BiometricAuthenticator {
 
     data class AuthenticationPromptParams(
         val title: String,
-        val negativeButtonLabel: String,
+        val negativeButtonLabel: String? = null,
         val subtitle: String? = null,
         val description: String? = null
     )
