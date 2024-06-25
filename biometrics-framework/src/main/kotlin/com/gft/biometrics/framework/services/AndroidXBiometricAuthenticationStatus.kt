@@ -8,20 +8,43 @@ import com.gft.biometrics.framework.utils.toAuthenticator
 class AndroidXBiometricAuthenticationStatus(
     private val biometricManager: BiometricManager
 ) : BiometricAuthenticationStatus {
+
     override fun isBiometricAuthenticationSupported(authenticationStrength: AuthenticationStrength) =
-        isBiometricAuthenticationSupported(getBiometricStatus(authenticationStrength))
+        getBiometricStatus(authenticationStrength)
+            .takeIf { status -> status.isKnownStatus() }
+            .let { status ->
+                status !in arrayOf(
+                    BiometricManager.BIOMETRIC_STATUS_UNKNOWN,
+                    BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED,
+                    BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE
+                )
+            }
 
-    private fun isBiometricAuthenticationSupported(biometricStatus: Int) =
-        biometricStatus != BiometricManager.BIOMETRIC_STATUS_UNKNOWN &&
-            biometricStatus != BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE &&
-            biometricStatus != BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED
+    override fun areBiometricCredentialsEnrolled(authenticationStrength: AuthenticationStrength) =
+        getBiometricStatus(authenticationStrength)
+            .takeIf { status -> status.isKnownStatus() }
+            .let { status ->
+                status !in arrayOf(
+                    BiometricManager.BIOMETRIC_STATUS_UNKNOWN,
+                    BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED,
+                    BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE,
+                    BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED,
+                )
+            }
 
-    override fun areBiometricCredentialsEnrolled(authenticationStrength: AuthenticationStrength): Boolean {
-        val biometricStatus = getBiometricStatus(authenticationStrength)
-        return isBiometricAuthenticationSupported(biometricStatus) &&
-            biometricStatus != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
-    }
+    override fun isBiometricAuthenticationUsable(authenticationStrength: AuthenticationStrength) =
+        getBiometricStatus(authenticationStrength) == BiometricManager.BIOMETRIC_SUCCESS
 
     private fun getBiometricStatus(authenticationStrength: AuthenticationStrength) =
         biometricManager.canAuthenticate(authenticationStrength.toAuthenticator())
+
+    private fun Int.isKnownStatus() = this in arrayOf(
+        BiometricManager.BIOMETRIC_SUCCESS,
+        BiometricManager.BIOMETRIC_STATUS_UNKNOWN,
+        BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED,
+        BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE,
+        BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED,
+        BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE,
+        BiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED,
+    )
 }
