@@ -43,7 +43,6 @@ android {
     flavorDimensions += listOf("platform")
 }
 
-
 tasks.withType<Test> {
     useJUnitPlatform()
 }
@@ -55,29 +54,29 @@ mavenPublishing {
             publishJavadocJar = true,
         )
     )
-    coordinates(MavenPublishConstants.groupId, "biometric-framework", MavenPublishConstants.version)
+    coordinates(project.property("publishingGroupId") as String, "biometric-framework", project.property("publishingVersion") as String)
 
     pom {
-        name.set(MavenPublishConstants.libraryName)
-        description.set(MavenPublishConstants.description)
-        inceptionYear.set(MavenPublishConstants.inceptionYear)
-        url.set("https://${MavenPublishConstants.repositoryUrl}")
+        name.set(project.property("publishingLibraryName") as String)
+        description.set(project.property("publishingDescription") as String)
+        inceptionYear.set(project.property("publishingInceptionYear") as String)
+        url.set("https://${project.property("publishingRepositoryUrl") as String}")
         licenses {
             license {
-                name.set(MavenPublishConstants.licenseName)
-                url.set(MavenPublishConstants.licenseUrl)
-                distribution.set(MavenPublishConstants.licenseDistribution)
+                name.set(project.property("publishingLicenseName") as String)
+                url.set(project.property("publishingLicenseUrl") as String)
+                distribution.set(project.property("publishingLicenseDistribution") as String)
             }
         }
         developers {
             developer {
-                name.set(MavenPublishConstants.developerName)
+                name.set(project.property("publishingDeveloperName") as String)
             }
         }
         scm {
-            url.set("https://${MavenPublishConstants.repositoryUrl}")
-            connection.set("scm:git:git://${MavenPublishConstants.repositoryUrl}")
-            developerConnection.set("scm:git:ssh://git@${MavenPublishConstants.repositoryUrl}.git")
+            url.set("https://${project.property("publishingRepositoryUrl") as String}")
+            connection.set("scm:git:git://${project.property("publishingRepositoryUrl") as String}")
+            developerConnection.set("scm:git:ssh://git@${project.property("publishingRepositoryUrl") as String}.git")
         }
         publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
         signAllPublications()
