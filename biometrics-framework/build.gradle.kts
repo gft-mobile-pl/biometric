@@ -1,6 +1,10 @@
+import com.vanniktech.maven.publish.AndroidMultiVariantLibrary
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("com.vanniktech.maven.publish")
 }
 
 android {
@@ -39,9 +43,47 @@ android {
     flavorDimensions += listOf("platform")
 }
 
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+mavenPublishing {
+    configure(
+        AndroidMultiVariantLibrary(
+            sourcesJar = true,
+            publishJavadocJar = true,
+        )
+    )
+    coordinates(MavenPublishConstants.groupId, "biometric-framework", MavenPublishConstants.version)
+
+    pom {
+        name.set(MavenPublishConstants.libraryName)
+        description.set(MavenPublishConstants.description)
+        inceptionYear.set(MavenPublishConstants.inceptionYear)
+        url.set("https://${MavenPublishConstants.repositoryUrl}")
+        licenses {
+            license {
+                name.set(MavenPublishConstants.licenseName)
+                url.set(MavenPublishConstants.licenseUrl)
+                distribution.set(MavenPublishConstants.licenseDistribution)
+            }
+        }
+        developers {
+            developer {
+                name.set(MavenPublishConstants.developerName)
+            }
+        }
+        scm {
+            url.set("https://${MavenPublishConstants.repositoryUrl}")
+            connection.set("scm:git:git://${MavenPublishConstants.repositoryUrl}")
+            developerConnection.set("scm:git:ssh://git@${MavenPublishConstants.repositoryUrl}.git")
+        }
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+        signAllPublications()
+    }
+}
+
 
 dependencies {
 
