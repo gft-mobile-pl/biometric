@@ -1,7 +1,7 @@
-package com.gft.biometric.android.utils
+package com.gft.biometric.utils
 
 import androidx.biometric.BiometricManager
-import com.gft.biometric.api.model.AuthenticationStrength
+import com.gft.biometric.model.AuthenticationStrength
 
 fun AuthenticationStrength.toAuthenticator() = when (this) {
     AuthenticationStrength.WEAK -> BiometricManager.Authenticators.BIOMETRIC_WEAK

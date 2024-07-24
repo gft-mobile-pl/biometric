@@ -1,4 +1,4 @@
-package com.gft.biometric.android.utils
+package com.gft.biometric.utils
 
 import android.annotation.SuppressLint
 import android.content.Intent

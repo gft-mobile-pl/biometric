@@ -1,4 +1,4 @@
-package com.gft.biometric.api.model
+package com.gft.biometric.model
 
 sealed class BiometricAuthenticationError : RuntimeException() {
     object BiometricSensorUnavailable : BiometricAuthenticationError()

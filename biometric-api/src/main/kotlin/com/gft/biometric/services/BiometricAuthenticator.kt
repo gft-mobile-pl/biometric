@@ -1,6 +1,6 @@
-package com.gft.biometric.api.services
+package com.gft.biometric.services
 
-import com.gft.biometric.api.model.AuthenticationStrength
+import com.gft.biometric.model.AuthenticationStrength
 import javax.crypto.Cipher
 
 interface BiometricAuthenticator {

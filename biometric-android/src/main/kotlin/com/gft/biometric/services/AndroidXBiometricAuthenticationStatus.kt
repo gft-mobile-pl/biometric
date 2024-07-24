@@ -1,9 +1,9 @@
-package com.gft.biometric.android.services
+package com.gft.biometric.services
 
 import androidx.biometric.BiometricManager
-import com.gft.biometric.api.model.AuthenticationStrength
-import com.gft.biometric.api.services.BiometricAuthenticationStatus
-import com.gft.biometric.android.utils.toAuthenticator
+import com.gft.biometric.model.AuthenticationStrength
+import com.gft.biometric.services.BiometricAuthenticationStatus
+import com.gft.biometric.utils.toAuthenticator
 
 class AndroidXBiometricAuthenticationStatus(
     private val biometricManager: BiometricManager

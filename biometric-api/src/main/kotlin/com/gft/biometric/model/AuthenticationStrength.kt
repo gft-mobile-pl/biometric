@@ -1,4 +1,4 @@
-package com.gft.biometric.api.model
+package com.gft.biometric.model
 
 enum class AuthenticationStrength {
     WEAK,

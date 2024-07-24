@@ -1,4 +1,4 @@
-package com.gft.biometric.android.services
+package com.gft.biometric.services
 
 import androidx.biometric.BiometricPrompt
 import com.gft.biometric.api.model.BiometricAuthenticationError

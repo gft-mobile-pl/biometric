@@ -1,4 +1,4 @@
-package com.gft.biometric.android.services
+package com.gft.biometric.services
 
 
 import android.content.Context
@@ -12,9 +12,10 @@ import androidx.biometric.BiometricPrompt.PromptInfo
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.gft.biometric.api.model.AuthenticationStrength
-import com.gft.biometric.api.services.BiometricAuthenticator
-import com.gft.biometric.android.utils.toAuthenticator
+import com.gft.biometric.model.AuthenticationStrength
+import com.gft.biometric.services.BiometricAuthenticator
+import com.gft.biometric.utils.toAuthenticator
+import com.gft.biometric.services.BiometricAuthenticationCallback
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect

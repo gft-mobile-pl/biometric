@@ -1,9 +1,10 @@
-package com.gft.biometric.android.services
+package com.gft.biometric.services
 
 import androidx.biometric.BiometricManager
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.gft.biometric.api.model.AuthenticationStrength
+import com.gft.biometric.model.AuthenticationStrength
+import com.gft.biometric.services.AndroidXBiometricAuthenticationStatus
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.params.ParameterizedTest
