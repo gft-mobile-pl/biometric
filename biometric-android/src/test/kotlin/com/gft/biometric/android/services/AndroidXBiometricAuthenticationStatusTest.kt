@@ -18,7 +18,7 @@ class AndroidXBiometricAuthenticationStatusTest {
 
     @ParameterizedTest(name = "givenStatus = {0}, expecting = {1}")
     @MethodSource("isBiometricAuthenticationSupportedMapping")
-    fun `should return correct boolean based on Biometrics availability given BiometricManager status`(
+    fun `should return correct boolean based on Biometric availability given BiometricManager status`(
         givenStatus: Int,
         expectedResult: Boolean,
     ) {
@@ -34,7 +34,7 @@ class AndroidXBiometricAuthenticationStatusTest {
 
     @ParameterizedTest(name = "givenStatus = {0}, expecting = {1}")
     @MethodSource("isBiometricAuthenticationUsableMapping")
-    fun `should return correct boolean based on Biometrics usability given BiometricManager status `(
+    fun `should return correct boolean based on Biometric usability given BiometricManager status `(
         givenStatus: Int,
         expectedResult: Boolean,
     ) {

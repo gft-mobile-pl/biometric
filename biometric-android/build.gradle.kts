@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.gft.biometrics.framework"
+    namespace = "com.gft.biometric.android"
     compileSdk = 33
 
     defaultConfig {

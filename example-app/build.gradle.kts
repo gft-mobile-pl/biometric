@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.gft.biometrics"
+    namespace = "com.gft.biometric"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.gft.biometrics"
+        applicationId = "com.gft.biometric"
         minSdk = 28
         targetSdk = 33
         versionCode = 1
@@ -37,7 +37,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.5"
     }
     packaging {
         resources {
