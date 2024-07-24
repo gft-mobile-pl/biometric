@@ -85,7 +85,7 @@ mavenPublishing {
 
 
 dependencies {
-    api(":biometric-api")
+    api(project(":biometric-api"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
