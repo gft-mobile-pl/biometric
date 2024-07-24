@@ -1,7 +1,7 @@
 package com.gft.biometric.services
 
 import androidx.biometric.BiometricPrompt
-import com.gft.biometric.api.model.BiometricAuthenticationError
+import com.gft.biometric.model.BiometricAuthenticationError
 
 internal class BiometricAuthenticationCallback(
     private val onAuthenticationSuccessful: () -> Unit,
