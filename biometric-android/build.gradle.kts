@@ -85,12 +85,13 @@ mavenPublishing {
 
 
 dependencies {
+    api(":biometric-api")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    api(":biometric-api")
 
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.2")
     testImplementation("io.mockk:mockk:1.13.9")
