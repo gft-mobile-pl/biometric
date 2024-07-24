@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name="com.gft.biometric.services.AndroidXBiometricAuthenticator$BiometricAuthenticationActivity"
+            android:name=".services.AndroidXBiometricAuthenticator$BiometricAuthenticationActivity"
             android:theme="@style/Theme.BiometricAuthenticator.Transparent" />
     </application>
 
