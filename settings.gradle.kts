@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "biometrics"
+rootProject.name = "biometric"
 include(":example-app")
-include(":biometrics-domain")
-include(":biometrics-framework")
+include(":biometric-api")
+include(":biometric-android")
