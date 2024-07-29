@@ -1,10 +1,9 @@
-import com.vanniktech.maven.publish.AndroidMultiVariantLibrary
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.vanniktech.maven.publish")
+    id("com.vanniktech.maven.publish.base")
 }
 
 android {
@@ -47,43 +46,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-mavenPublishing {
-    configure(
-        AndroidMultiVariantLibrary(
-            sourcesJar = true,
-            publishJavadocJar = true,
-        )
-    )
-    coordinates(project.property("libraryGroupId") as String, "biometric-android", project.property("libraryVersion") as String)
-
-    pom {
-        name.set(project.property("libraryNamePrefix") as String + " Android")
-        description.set(project.property("libraryDescription") as String)
-        inceptionYear.set(project.property("libraryInceptionYear") as String)
-        url.set("https://${project.property("libraryRepositoryUrl") as String}")
-        licenses {
-            license {
-                name.set(project.property("libraryLicenseName") as String)
-                url.set(project.property("libraryLicenseUrl") as String)
-                distribution.set(project.property("libraryLicenseDistribution") as String)
-            }
-        }
-        developers {
-            developer {
-                name.set(project.property("libraryDeveloperName") as String)
-            }
-        }
-        scm {
-            url.set("https://${project.property("libraryRepositoryUrl") as String}")
-            connection.set("scm:git:git://${project.property("libraryRepositoryUrl") as String}")
-            developerConnection.set("scm:git:ssh://git@${project.property("libraryRepositoryUrl") as String}.git")
-        }
-        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-        signAllPublications()
-    }
-}
-
-
 dependencies {
     api(project(":biometric-api"))
 
@@ -99,4 +61,52 @@ dependencies {
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+}
+
+
+afterEvaluate {
+    fun configureFlavorPublication(flavor: String) {
+        publishing {
+            publications {
+                create<MavenPublication>("${flavor}Release") {
+                    from(components["${flavor}Release"])
+                    groupId = project.property("libraryGroupId") as String
+                    artifactId = "biometric-$flavor"
+                    version = project.property("libraryVersion") as String
+
+                    pom {
+                        name.set("${project.property("libraryNamePrefix")} Android ($flavor)")
+                        description.set(project.property("libraryDescription") as String)
+                        inceptionYear.set(project.property("libraryInceptionYear") as String)
+                        url.set("https://${project.property("libraryRepositoryUrl") as String}")
+                        licenses {
+                            license {
+                                name.set(project.property("libraryLicenseName") as String)
+                                url.set(project.property("libraryLicenseUrl") as String)
+                                distribution.set(project.property("libraryLicenseDistribution") as String)
+                            }
+                        }
+                        developers {
+                            developer {
+                                name.set(project.property("libraryDeveloperName") as String)
+                            }
+                        }
+                        scm {
+                            url.set("https://${project.property("libraryRepositoryUrl") as String}")
+                            connection.set("scm:git:git://${project.property("libraryRepositoryUrl") as String}")
+                            developerConnection.set("scm:git:ssh://git@${project.property("libraryRepositoryUrl") as String}.git")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    configureFlavorPublication("google")
+    configureFlavorPublication("huawei")
 }
